@@ -1,0 +1,22 @@
+<section class="section">
+    <div class="banner swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/imgs/banner1.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="images/imgs/banner2.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="images/imgs/banner3.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="images/imgs/banner4.jpg" alt=""></div>
+            <div class="swiper-slide"><img src="images/imgs/banner5.jpg" alt=""></div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="list">
+        <ul id="thelist">
+            <li ng-repeat="i in datas">
+                <span class="snger">{{i.singers}}</span>
+                <span class="name">{{i.song_name}}</span>
+                <span><img src="images/imgs/download_icon_2.png" alt=""></span>
+            </li>
+        </ul>
+    </div>
+</section>
+

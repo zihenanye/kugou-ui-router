@@ -1,0 +1,62 @@
+.search
+  height: 40px
+  line-height: 40px
+  display: -webkit-flex
+  padding: 0 4%
+  box-sizing: border-box
+  margin-top: 5px
+  div
+    &:nth-child(1)
+      flex: 1
+      .fa
+        font-size: 20px
+        color: #262626
+    &:nth-child(2)
+      flex: 8
+      background: #EEEEEE
+      margin: 5px 0
+      line-height: 30px
+      .fa
+        padding: 0 8px
+        color: #818181
+      input
+        border: none
+        background: #EEEEEE
+        width: 80%
+      ::-webkit-input-placeholder
+        color: #A9A9A9
+        font-size: .14rem
+.mark
+  width: 100%
+  height: 100%
+  background: rgba(0,0,0,0.4)
+  position: absolute
+  top: 0
+  .dialog
+    width: 80%
+    margin: 60% auto
+    height: 100px
+    background: #ffffff
+    border-radius: 10px
+    border-top: 2px solid #2CA2F9
+    b
+      display: block
+      height: 60px
+      line-height: 60px
+      text-align: center
+      font-size: .14rem
+      color: #000
+      font-weight: normal
+    p
+      border-top: 1px solid #ccc
+      font-size: .14rem
+      color: #666
+      display: -webkit-flex
+      span
+        flex: 1
+        display: inline-block
+        line-height: 40px
+        text-align: center
+        &:nth-child(2)
+          color: #2CA2F9
+          border-left: 1px solid #ccc

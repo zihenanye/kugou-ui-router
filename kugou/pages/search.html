@@ -1,0 +1,18 @@
+<section class="section">
+    <div class="search">
+        <div><a ui-sref="back"><i class="fa fa-angle-left"></i></a></div>
+        <div>
+            <i class="fa fa-search"></i>
+            <input type="text" placeholder="请输入商品名称" ng-model="sing">
+        </div>
+    </div>
+    <div class="list">
+        <ul id="thelist">
+            <li ng-repeat="i in datas | filter:sing">
+                <span class="snger">{{i.singers}}</span>
+                <span class="name">{{i.song_name}}</span>
+                <span ng-click="download()"><img src="images/imgs/download_icon_2.png" alt=""></span>
+            </li>
+        </ul>
+    </div>
+</section>

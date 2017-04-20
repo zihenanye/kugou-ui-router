@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <title>{{title}}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <link type="text/css" rel="stylesheet" href="./css/swiper.css">
+    <link type="text/css" rel="stylesheet" href="./css/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="./css/reset.css">
+    <link type="text/css" rel="stylesheet" href="./css/common.css">
+    <link type="text/css" rel="stylesheet" href="./css/home.css">
+    <link type="text/css" rel="stylesheet" href="./css/index.css">
+    <link type="text/css" rel="stylesheet" href="./css/two.css">
+    <link type="text/css" rel="stylesheet" href="./css/three.css">
+    <link type="text/css" rel="stylesheet" href="./css/four.css">
+    <link type="text/css" rel="stylesheet" href="./css/search.css">
+</head>
+<body>
+<div id="wrapper" class="wrapper">
+    <header class="header">
+        <div><img src="./images/imgs/logo.png" alt="div"></div>
+        <div><span>下载酷狗</span></div>
+        <div ui-sref="search"><img src="./images/imgs/search.png" alt=""></div>
+    </header>
+    <nav class="nav">
+        <a ui-sref="index" ui-sref-active="on">新歌</a>
+        <a ui-sref="two" ui-sref-active="on">排行</a>
+        <a ui-sref="three" ui-sref-active="on">歌单</a>
+        <a ui-sref="four" ui-sref-active="on">歌手</a>
+    </nav>
+    <div ui-view></div>
+</div>
+
+<script type="text/javascript" src="js/swiper.js"></script>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/angular-ui-router.js"></script>
+<script>
+    var app = angular.module("app", ['ui.router']);
+    app.config(function ($stateProvider, $urlRouterProvider) {
+        //重定向
+        $urlRouterProvider.otherwise('/indexpage');
+        $stateProvider
+                .state({
+                    name: "index",
+                    url: "/indexpage",
+                    title: "新歌",
+                    templateUrl: "./pages/index.html",
+                    controller: function ($rootScope, prepare) {
+                        //console.log(prepare.data.data[0])
+                        $rootScope.datas = prepare.data.data;
+                        //图片轮播
+                        new Swiper(".banner", {
+                            pagination: '.swiper-pagination',
+                            autoplay: 2000,
+                            paginationClickable: true
+                        })
+                    },
+                    resolve: {
+                        prepare: function ($http) {
+                            return $http.get("js/data/music_list.json");
+                        }
+                    }
+                })
+                .state({
+                    name: "two",
+                    url: "/twopage",
+                    title: "排行",
+                    templateUrl: "./pages/two.html"
+                })
+                .state({
+                    name: "three",
+                    url: "/threepage",
+                    title: "歌单",
+                    templateUrl: "./pages/three.html"
+                })
+                .state({
+                    name: "four",
+                    url: "/fourpage",
+                    title: "歌手",
+                    templateUrl: "./pages/four.html"
+                })
+                .state({
+                    name: "search",
+                    url: "/searchpage",
+                    title: "搜索",
+                    templateUrl: "./pages/search.html",
+                    controller: function ($scope, prepare) {
+                        $scope.datas = prepare.data.data;
+                        $scope.download = function () {
+                            var divs = document.createElement('div');
+                            divs.className = 'mark';
+                            var section = document.querySelector(".section");
+                            section.appendChild(divs);
+                            var str = '<div class="dialog">' +
+                                    '<b>下载需要手机客户端支持</b>' +
+                                    '<p><span class="cancel">取消</span><span class="confirm" id="confirm">在客户端下载</span></p>' +
+                                    '</div>';
+                            divs.innerHTML = str;
+                            //点击取消
+                            var cancel = document.querySelector(".cancel");
+                            var confirm = document.querySelector(".confirm");
+                            divs.onclick = function (e) {
+                                var event = e || window.event;
+                                var target = event.target || event.srcElement;
+                                if (target == cancel) {
+                                    divs.style.display = "none";
+                                }
+                                if (target == confirm) {
+                                    alert("酷狗客户端正在下载");
+                                    divs.style.display = "none";
+                                }
+                            }
+
+                        }
+                    },
+                    resolve: {
+                        prepare: function ($http) {
+                            return $http.get("js/data/music_list.json");
+                        }
+                    }
+                })
+                .state({
+                    name: "back",
+                    url: "/indexpage",
+                    templateUrl: "./pages/index.html"
+                })
+    });
+    app.run(function ($rootScope) {
+        $rootScope.$on('$stateChangeStart', function (event, next, nextParam, prev, prevParam) {
+            $rootScope.title = next.title
+        })
+    })
+
+</script>
+</body>
+</html>

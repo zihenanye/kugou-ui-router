@@ -1,0 +1,22 @@
+.content {
+  padding-left: 4%;
+  box-sizing: border-box; }
+  .content dl {
+    border-bottom: 1px solid #E5E5E5;
+    padding: 10px 0;
+    display: -webkit-flex; }
+    .content dl dd {
+      flex: 8;
+      margin-left: 15px;
+      padding-top: 25px;
+      position: relative; }
+      .content dl dd b {
+        font-size: 0.14rem; }
+      .content dl dd span {
+        position: absolute;
+        right: 4%; }
+        .content dl dd span .fa {
+          font-size: 20px;
+          color: #E2E2E2; }
+
+/*# sourceMappingURL=two.css.map */
